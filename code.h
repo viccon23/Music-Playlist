@@ -1,7 +1,6 @@
 #include <iostream>
-#include <limits>
-#include <vector>
 #include <string>
+#include <vector>
 using namespace std;
 
 struct Song {
@@ -64,6 +63,7 @@ struct Playlist {
   // Remove only the first track in the playlist
   void removeFirstTrack() {
     if (head == nullptr) {
+      cout << "\nPlaylist is already empty!\n" << endl;
       return;
     }
     Track *oldHead = head;
@@ -73,7 +73,7 @@ struct Playlist {
   // Remove any track based on input parameter
   void removeTrack(string title) {
     if (head == nullptr) {
-      cout << "Playlist is already empty!" << endl;
+      cout << "\nPlaylist is already empty!\n" << endl;
       return;
     }
     if (head->song->title == title) {
@@ -107,7 +107,7 @@ struct Playlist {
       }
       curr = curr->next;
     }
-    cout << "Could not find track name!";
+    cout << "\nCould not find track name!\n";
   }
 
   void insertTrackAt(Song *s, vector<string> genres, vector<string> artists,
@@ -168,6 +168,10 @@ struct Playlist {
 
   void searchByGenre(string genre) {
     bool found = false;
+    if (head == nullptr) {
+      cout << "\nPlaylist is already empty!\n" << endl;
+      return;
+    }
     cout << "Songs with the genre '" << genre << "' in playlist " << name << ":"
          << endl;
     Track *curr = head;
@@ -196,8 +200,27 @@ struct Playlist {
       curr = curr->next;
     }
     if (!found) {
-      cout << "No songs with the genre " << genre << " found in playlist "
+      cout << "\nNo songs with the genre " << genre << " found in playlist \n"
            << name << "." << endl;
+      return;
     }
   }
 };
+
+void displayMenu() {
+    cout << "\nWelcome to the C++ Music Playlist Management System! Choose an "
+            "Option Below:"
+         << endl;
+    cout << "======================================" << endl;
+    cout << "     1.  Create Playlist" << endl;
+    cout << "     2.  Add Track to Playlist" << endl;
+    cout << "     3.  Remove the First Track of Playlist" << endl;
+    cout << "     4.  Remove Track by Song Title" << endl;
+    cout << "     5.  Favorite a Track" << endl;
+    cout << "     6.  Insert Track at a Specific Position" << endl;
+    cout << "     7.  Display Playlist" << endl;
+    cout << "     8.  Search Playlist by Genre" << endl;
+    cout << "     9.  Exit" << endl;
+    cout << "======================================" << endl;
+    cout << "Enter your choice: \n";
+  }
